@@ -1,0 +1,21 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5/10/2016, 10:03:19 PM
+    Author     : Boris T
+*/
+
+#mapa{
+	width: 480px;
+	height: 460px ;
+	float: auto;
+	background: rgb(204, 187, 217);
+}
+#foto{
+	width: 400px;
+	height: 370px ;
+	float: auto;
+}

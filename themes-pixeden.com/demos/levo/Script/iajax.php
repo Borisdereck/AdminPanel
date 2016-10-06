@@ -1,0 +1,63 @@
+<?php
+
+sleep(2);
+header('content-type: application/json; charset=utf-8'); //HEADER PARA JSON
+include_once 'puntosDao.php';
+$ac = isset($_POST["tipo"]) ? $_POST["tipo"] : "x"; //PARAMETRO PARA DETERMINAR LA ACCION
+
+switch ($ac) {
+    case "grabar":
+        $p = new puntosDao();
+        $exito = $p->grabar($_POST["nom"], $_POST["tel"], $_POST["dir"], $_POST["cx"], $_POST["cy"]);
+        if ($exito) {
+            $r["estado"] = "ok";
+            $r["mensaje"] = "Grabado Correctamente";
+        } else {
+            $r["estado"] = "error";
+            $r["mensaje"] = "error al grabar!";
+        }
+        break;
+
+    case "borrar":
+        $d = new puntosDao();
+        $resultados = $d->borrar($_POST["id"]);
+        if ($resultados) {
+            $r["estado"] = "ok";
+            $r["mensaje"] = "Grabado Correctamente";
+        } else {
+            $r["estado"] = "error";
+            $r["mensaje"] = "error al grabar!";
+        }
+
+        break;
+
+    case "listar":
+        $p = new puntosDao();
+        $resultados = $p->listar_todo();
+        if (sizeof($resultados) > 0) {
+            $r["estado"] = "ok";
+            $r["mensaje"] = $resultados;
+        } else {
+            $r["estado"] = "error";
+            $r["mensaje"] = "No ahi registros!";
+        }
+        break;
+    case "empresa":
+        $p = new puntosDao();
+        $resultados = $p->listar_empresa();
+        if (sizeof($resultados) > 0) {
+            $r["estado"] = "ok";
+            $r["mensaje"] = $resultados;
+        } else {
+            $r["estado"] = "error";
+            $r["mensaje"] = "No ahi registros!";
+        }
+        break;
+
+    default:
+        $r["estado"] = "error";
+        $r["mensaje"] = "datos no validos";
+        break;
+}
+echo json_encode($r); //IMPRIMIR JSON
+?>
